@@ -1,3 +1,4 @@
+
 CREATE TABLE "Specialization" (
     "Id" UUID PRIMARY KEY,
     "Name" VARCHAR(100)
@@ -25,14 +26,6 @@ CREATE TABLE "Patient" (
     FOREIGN KEY ("AddressId") REFERENCES "Address"("Id")
 );
 
-CREATE TABLE "Appointent" (
-    "Id" UUID PRIMARY KEY,
-    "PatientId" UUID,
-    "DepartmentId" UUID,
-    "AppointmentDate" DATE,
-    FOREIGN KEY ("PatientId") REFERENCES "Patient"("Id"),
-    FOREIGN KEY ("DepartmentId") REFERENCES "Department"("Id")
-);
 
 CREATE TABLE "Doctor" (
     "Id" UUID PRIMARY KEY,
@@ -48,9 +41,10 @@ CREATE TABLE "Doctor" (
 );
 
 
-alter  table "MedicalRecord" add column "Problem" VARCHAR(1000)
 CREATE TABLE "MedicalRecord" (
+	
     "Id" UUID PRIMARY KEY,
+    "AppointentDate" DATE, 
     "PatientId" UUID,
     FOREIGN KEY ("PatientId") REFERENCES "Patient"("Id"),
     "DoctorId" UUID,
@@ -103,4 +97,3 @@ INSERT INTO "MedicalRecord" ("Id", "PatientId", "AppointmentDate", "Problem", "D
 VALUES
     ('00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001', '2023-05-31', 'Problem 1', '00000000-0000-0000-0000-000000000001'),
     ('00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000002', '2023-06-01', 'Problem 2', '00000000-0000-0000-0000-000000000002')
-
